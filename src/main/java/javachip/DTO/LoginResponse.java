@@ -1,11 +1,21 @@
-package javachip.DTO;
+package javachip.dto;
 
 public class LoginResponse {
     private String userId;
-    private String name;
+    private String password;
 
-    public LoginResponse(String userId, String name) {
+    public LoginResponse() {}
+
+    public LoginResponse(String userId, String password) {
         this.userId = userId;
-        this.name = name;
+        this.password = password;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

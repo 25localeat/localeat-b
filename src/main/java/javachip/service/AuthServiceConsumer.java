@@ -1,23 +1,27 @@
-package javachip.Service;
+package javachip.service;
 
-import javachip.DTO.LoginRequest;
-import javachip.DTO.LoginResponse;
-import javachip.DTO.SignUpRequest;
+import javachip.dto.LoginRequest;
+import javachip.dto.LoginResponse;
+import javachip.dto.SignUpRequest;
 import javachip.entity.Consumer;
 import javachip.entity.UserRole;
 import javachip.repository.ConsumerRepository;
+import javachip.repository.SellerRepository;
+import javachip.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
-public class AuthService {
+@Service("AuthServiceConsumer")
+public class AuthServiceConsumer implements javachip.service.AuthService {
 
     private final ConsumerRepository consumerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    public AuthService(ConsumerRepository consumerRepository, PasswordEncoder passwordEncoder) {
+    public AuthServiceConsumer(ConsumerRepository consumerRepository, SellerRepository sellerRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.consumerRepository = consumerRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     public void registerConsumer(SignUpRequest request) {
@@ -35,6 +39,7 @@ public class AuthService {
         consumerRepository.save(consumer);
     }
 
+    @Override
     public LoginResponse login(LoginRequest request) {
         Consumer user = consumerRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("해당 사용자가 존재하지 않습니다."));
@@ -43,8 +48,13 @@ public class AuthService {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
 
-        return new LoginResponse(user.getUserId(), user.getName());
+        return new LoginResponse(user.getUserId(), user.getPassword());
     }
+
+    public boolean isUserIdDuplicate(String userId) {
+        return userRepository.existsByUserId(userId);
+    }
+
 }
 
 

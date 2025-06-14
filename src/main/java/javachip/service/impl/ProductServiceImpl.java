@@ -116,11 +116,20 @@ public class ProductServiceImpl implements ProductService {
         User user = userRepository.findById(dto.getSellerId())
                 .orElseThrow(() -> new RuntimeException("판매자 정보를 찾을 수 없습니다."));
 
-        Seller seller = (Seller) user; // 다운캐스팅 해줘야 함.
-        Product updated = dto.toEntity(seller);
-        updated.setId(existing.getId());
+        Seller seller = (Seller) user;
+        
+        // 기존 데이터 유지하면서 새로운 데이터로 업데이트
+        existing.setProductName(dto.getProductName());
+        existing.setPrice(dto.getPrice());
+        existing.setLocal(dto.getLocal());
+        existing.setIsGroupBuy(dto.getIsGroupBuy());
+        existing.setProductGrade(dto.getProductGrade() != null ? GradeBOption.valueOf(dto.getProductGrade()) : null);
+        existing.setMaxParticipants(dto.getMaxParticipants());
+        existing.setDescription(dto.getDescription());
+        existing.setSeller(seller);
+        // createdAt은 수정하지 않음 (기존 등록일 유지)
 
-        ProductDto.fromEntity(repository.save(updated));
+        repository.save(existing);
     }
 
     /**

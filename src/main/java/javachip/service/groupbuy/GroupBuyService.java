@@ -231,8 +231,8 @@ public class GroupBuyService {
 
         return parts.stream()
                 .map(Participant::getGroupBuy)
-                // ① 상태가 RECRUITING 또는 PAYMENT_PENDING 이고
-                // ② 마감 시간이 현재(now) 이후인 것만 남긴다
+                // 상태가 RECRUITING 또는 PAYMENT_PENDING 이고
+                // 마감 시간이 현재(now) 이후인 것만 남긴다
                 .filter(gb ->
                         (gb.getStatus() == GroupBuyStatus.RECRUITING
                                 || gb.getStatus() == GroupBuyStatus.PAYMENT_PENDING)

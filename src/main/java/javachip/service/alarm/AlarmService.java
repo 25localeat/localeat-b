@@ -171,8 +171,6 @@ public class AlarmService {
         }
     }
 
-
-
     private NotificationType getTypeFromOrderItem(OrderItem item) {
         if (item.isSubscription()) return NotificationType.SUBSCRIPTION;
         if (item.isGroupBuy()) return NotificationType.GROUP_BUY;
@@ -200,7 +198,6 @@ public class AlarmService {
                 .orElseThrow(() -> new RuntimeException("알림을 찾을 수 없습니다."));
         alarm.setIsRead("Y");
         alarmRepository.save(alarm);
-        System.out.println("✅ 알림 읽음 처리 완료: alarmId=" + alarmId);
     }
 
     @Transactional
@@ -214,9 +211,9 @@ public class AlarmService {
                     .orElseThrow(() -> new RuntimeException("알림을 찾을 수 없습니다."));
             alarmRepository.delete(alarm);
 
-            System.out.println("✅ 알림 삭제 완료: alarmId=" + alarmId);
+            System.out.println("알림 삭제 완료: alarmId=" + alarmId);
         } catch (Exception e) {
-            System.out.println("❌ 알림 삭제 실패: " + e.getMessage());
+            System.out.println("알림 삭제 실패: " + e.getMessage());
             throw new RuntimeException("알림 삭제 실패", e);
         }
     }
@@ -226,7 +223,7 @@ public class AlarmService {
         String buyerId = orderItem.getUserId();
 
         if (buyerId == null || buyerId.isBlank()) {
-            System.out.println("❌ 구매자 ID 없음");
+            System.out.println("구매자 ID 없음");
             return;
         }
 
@@ -241,7 +238,7 @@ public class AlarmService {
                     .type(type)
                     .message(message)
                     .timestamp(LocalDateTime.now())
-                    .user(consumer)  // ✅ Consumer 객체 사용
+                    .user(consumer)  // Consumer 객체 사용
                     .order(orderItem.getOrder())
                     .isRead("N")
                     .build();
@@ -255,10 +252,10 @@ public class AlarmService {
                     message
             );
 
-            System.out.println("✅ 구매자 배송 상태 알림 전송 완료 - " + message);
+            System.out.println("구매자 배송 상태 알림 전송 완료 - " + message);
 
         } catch (Exception e) {
-            System.out.println("❌ 알림 처리 실패: " + e.getMessage());
+            System.out.println("알림 처리 실패: " + e.getMessage());
             throw new RuntimeException("배송 상태 알림 실패", e);
         }
     }
@@ -298,10 +295,10 @@ public class AlarmService {
                     message
             );
 
-            System.out.println("✅ 공동구매 완료 알림 생성 및 전송 완료 - " + alarm.getMessage());
+            System.out.println("공동구매 완료 알림 생성 및 전송 완료 - " + alarm.getMessage());
 
         } catch (Exception e) {
-            System.out.println("❌ 공동구매 완료 알림 저장 실패: " + e.getMessage());
+            System.out.println("공동구매 완료 알림 저장 실패: " + e.getMessage());
             throw new RuntimeException("공동구매 완료 알림 처리 실패", e);
         }
     }
@@ -314,7 +311,7 @@ public class AlarmService {
         Seller seller = product.getSeller();
 
         if (seller == null) {
-            System.out.println("❌ 판매자 정보 없음. 알림 생략.");
+            System.out.println("판매자 정보 없음. 알림 생략.");
             return;
         }
 
@@ -338,10 +335,10 @@ public class AlarmService {
                     message
             );
 
-            System.out.println("✅ 문의 등록 알림 전송 완료 - " + message);
+            System.out.println(" 문의 등록 알림 전송 완료 - " + message);
 
         } catch (Exception e) {
-            System.out.println("❌ 문의 등록 알림 실패: " + e.getMessage());
+            System.out.println("문의 등록 알림 실패: " + e.getMessage());
             throw new RuntimeException("문의 등록 알림 실패", e);
         }
     }
@@ -354,7 +351,7 @@ public class AlarmService {
         Product product = inquiry.getProduct();
 
         if (consumer == null) {
-            System.out.println("❌ 구매자 정보 없음. 알림 생략.");
+            System.out.println("구매자 정보 없음. 알림 생략.");
             return;
         }
 
@@ -378,10 +375,10 @@ public class AlarmService {
                     message
             );
 
-            System.out.println("✅ 문의 답변 알림 전송 완료 - " + message);
+            System.out.println("문의 답변 알림 전송 완료 - " + message);
 
         } catch (Exception e) {
-            System.out.println("❌ 문의 답변 알림 실패: " + e.getMessage());
+            System.out.println("문의 답변 알림 실패: " + e.getMessage());
             throw new RuntimeException("문의 답변 알림 실패", e);
         }
     }

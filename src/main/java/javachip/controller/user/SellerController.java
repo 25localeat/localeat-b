@@ -14,14 +14,14 @@ public class SellerController {
         this.sellerService = sellerService;
     }
 
-    // ✅ 판매자 정보 조회
+    // 판매자 정보 조회
     @GetMapping("/profile")
     public ResponseEntity<Seller> getSeller(@RequestParam String userId) {
         Seller seller = sellerService.getSellerById(userId);
         return ResponseEntity.ok(seller);
     }
 
-    // ✅ 판매자 정보 수정
+    // 판매자 정보 수정
     @PutMapping("/profile")
     public ResponseEntity<Seller> updateSeller(
             @RequestParam String userId,

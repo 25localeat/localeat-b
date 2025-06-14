@@ -26,7 +26,6 @@ public class AlarmController {
                     .collect(Collectors.toList());
             return ResponseEntity.ok(alarmDtos);
         } catch (Exception e) {
-            System.out.println("❌ 알림 조회 실패: " + e.getMessage());
             throw new RuntimeException("알림 조회 실패", e);
         }
     }
@@ -38,7 +37,6 @@ public class AlarmController {
             alarmService.markAlarmAsRead(alarmId);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println("❌ 알림 읽음 처리 실패: " + e.getMessage());
             throw new RuntimeException("알림 읽음 처리 실패", e);
         }
     }
@@ -50,7 +48,6 @@ public class AlarmController {
             alarmService.deleteAlarm(alarmId);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println("❌ 알림 삭제 실패: " + e.getMessage());
             throw new RuntimeException("알림 삭제 실패", e);
         }
     }

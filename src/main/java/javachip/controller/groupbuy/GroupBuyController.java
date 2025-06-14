@@ -17,7 +17,6 @@ import java.util.List;
 public class GroupBuyController {
 
     private final GroupBuyService groupBuyService;
-    private final GroupBuyService gbService;
 
     /**
      * 공동구매 생성 (소비자)
@@ -43,7 +42,7 @@ public class GroupBuyController {
     //상세조회
     @GetMapping("/{id}")
     public ResponseEntity<GroupBuyDetailResponse> getDetail(@PathVariable("id") Long id) {
-        GroupBuyDetailResponse resp = gbService.getDetail(id);
+        GroupBuyDetailResponse resp = groupBuyService.getDetail(id);
         return ResponseEntity.ok(resp);
     }
 

@@ -19,7 +19,7 @@ public class ImageController {
 
     private final ProductImageRepository imageRepository;
 
-    // ✅ 이미지 업로드 (Base64로 저장)
+    // 이미지 업로드 (Base64로 저장)
     @PostMapping("/{productId}")
     public ResponseEntity<String> uploadImage(
             @PathVariable Long productId,
@@ -46,7 +46,7 @@ public class ImageController {
         }
     }
 
-    // ✅ 이미지 조회 (Base64 → byte[] 변환 후 반환)
+    // 이미지 조회 (Base64 → byte[] 변환 후 반환)
     @GetMapping("/{productId}")
     public ResponseEntity<byte[]> getImage(@PathVariable Long productId) {
         List<ProductImage> imageList = imageRepository.findByProduct_Id(productId);

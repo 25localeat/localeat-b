@@ -47,7 +47,7 @@ public class ProductDto {
     private Long subscriptionId;
     private Integer maxParticipants;
     private Long alarmId;
-    private Date createAt;
+    private Date createdAt;
     private Integer stockQuantity;
 
     @NotNull(message = "{product.sellerId.notNull}")
@@ -79,7 +79,7 @@ public class ProductDto {
                 .subscriptionId(p.getSubscriptionId())
                 .maxParticipants(p.getMaxParticipants())
                 .alarmId(p.getAlarmId())
-                .createAt(p.getCreatedAt())
+                .createdAt(p.getCreatedAt())
                 .stockQuantity(p.getStockQuantity())
                 .sellerId(p.getSeller() != null ? p.getSeller().getUserId() : null)  // seller_id를 getSeller().getId()로 수정
                 .imageUrl(imageUrl)
@@ -112,7 +112,7 @@ public class ProductDto {
                 .subscriptionId(subscriptionId)
                 .maxParticipants(maxParticipants)
                 .alarmId(alarmId)
-                .createdAt(createAt)
+                .createdAt(createdAt)
                 .stockQuantity(stockQuantity)
                 .seller((Seller) seller)
                 .isGroupBuy(isGroupBuy)

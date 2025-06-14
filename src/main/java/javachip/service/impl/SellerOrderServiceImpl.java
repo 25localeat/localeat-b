@@ -40,9 +40,9 @@ public class SellerOrderServiceImpl implements SellerOrderService {
 
         OrderStatus newStatus = OrderStatus.valueOf(status);
 
-        // ✅ 동일 상태일 경우 처리 생략
+        // 동일 상태일 경우 처리 생략
         if (item.getStatus() == newStatus) {
-            System.out.println("⚠️ 이미 같은 상태입니다. 알림 생략");
+            System.out.println("이미 같은 상태입니다. 알림 생략");
             return;
         }
 

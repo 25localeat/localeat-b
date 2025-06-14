@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/cart/subscribe/items").permitAll()  // ✅ POST 명시
+                        .requestMatchers(HttpMethod.POST, "/api/cart/subscribe/items").permitAll()  // POST 명시
                         .requestMatchers("/signUp/**").permitAll()
                         .anyRequest().permitAll()
                 );

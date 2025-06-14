@@ -25,9 +25,9 @@ public class ConsumerService {
         consumer.setAddress(updatedInfo.getAddress());
         consumer.setLocal(updatedInfo.getLocal());
 
-        // ✅ 비밀번호가 입력된 경우에만 업데이트
+        // 비밀번호가 입력된 경우에만 업데이트
         if (updatedInfo.getPassword() != null && !updatedInfo.getPassword().isBlank()) {
-            consumer.setPassword(updatedInfo.getPassword()); // 🔐 보안상 bcrypt 암호화 필요
+            consumer.setPassword(updatedInfo.getPassword()); // 보안상 bcrypt 암호화 필요
         }
 
         return consumerRepository.save(consumer);

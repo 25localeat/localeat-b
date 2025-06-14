@@ -18,7 +18,7 @@ public class SubscribeCartController {
 
     @PostMapping("/items")
     public ResponseEntity<?> addToCart(@RequestHeader("userId") String userId, @RequestBody SubscribeCartItemRequest dto) {
-        System.out.println("✅ POST /items 진입 성공");
+        System.out.println("POST /items 진입 성공");
         subscribeCartService.addItem(userId, dto);
         return ResponseEntity.ok().build();
     }

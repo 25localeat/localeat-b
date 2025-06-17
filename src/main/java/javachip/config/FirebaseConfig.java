@@ -24,10 +24,10 @@ public class FirebaseConfig {
 
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
-                System.out.println("✅ Firebase has been initialized.");
+                System.out.println("Firebase has been initialized.");
             }
         } catch (IOException e) {
-            System.err.println("❌ Firebase initialization error: " + e.getMessage());
+            System.err.println("Firebase initialization error: " + e.getMessage());
         }
     }
 }

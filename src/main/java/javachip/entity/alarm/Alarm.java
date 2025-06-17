@@ -40,6 +40,6 @@ public class Alarm {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)  // 추가: 연관된 OrderAlarm도 함께 삭제
+    @OnDelete(action = OnDeleteAction.CASCADE)  // 연관된 OrderAlarm도 함께 삭제
     private Orders order;
 }

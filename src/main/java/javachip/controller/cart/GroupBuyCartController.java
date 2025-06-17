@@ -142,7 +142,7 @@ public class GroupBuyCartController {
                 gb.setStatus(GroupBuyStatus.SUCCESS);
                 groupBuyRepo.save(gb);
 
-                // ✅ 판매자 알림
+                // 판매자 알림
                 for (OrderItem orderItem : orderItems) {
                     if (orderItem.isGroupBuy() &&
                             orderItem.getProduct().equals(gb.getProduct())) {
@@ -150,7 +150,7 @@ public class GroupBuyCartController {
                     }
                 }
 
-                // ✅ 구매자 알림 (성공 참여자 전체)
+                // 구매자 알림 (성공 참여자 전체)
                 for (Participant p : gb.getParticipants()) {
                     alarmService.notifyGroupBuySuccessToBuyer(p.getConsumer(), gb);
                 }
